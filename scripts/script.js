@@ -2,11 +2,16 @@ var display = document.getElementById("display");
 var endgame = document.getElementById("endgame");
 
 var duck = document.getElementById("duck");
+var duckSpeed = 500;
 
 var hit = 0;
 var miss = 0;
 var hitdisplay = document.getElementById("hits");
 var missdisplay = document.getElementById("misses")
+
+var easy = document.getElementById("easy");
+var medium = document.getElementById("medium");
+var hard = document.getElementById("hard");
 
 var directions = 
 [
@@ -178,7 +183,7 @@ function checkBounds(bound)
 var run = setInterval(function(){
 	var rand = Math.floor((Math.random() * 8));
 	fly(directions[rand]);
-}, 500);
+}, duckSpeed);
 
 function checkEnd()
 {
@@ -191,3 +196,33 @@ function checkEnd()
 		score.innerHTML = "YOU SCORED "+hit+" HITS AND "+miss+" MISSES";
 	}
 }
+
+easy.addEventListener("click", function(){
+	miss -= 1;
+	duckSpeed = 700;
+	clearInterval(run);
+	run = setInterval(function(){
+		var rand = Math.floor((Math.random() * 8));
+		fly(directions[rand]);
+	}, duckSpeed);
+})
+
+medium.addEventListener("click", function(){
+	miss -= 1;
+	duckSpeed = 500;
+	clearInterval(run);
+	run = setInterval(function(){
+		var rand = Math.floor((Math.random() * 8));
+		fly(directions[rand]);
+	}, duckSpeed);
+})
+
+hard.addEventListener("click", function(){
+	miss -= 1;
+	duckSpeed = 300;
+	clearInterval(run);
+	run = setInterval(function(){
+		var rand = Math.floor((Math.random() * 8));
+		fly(directions[rand]);
+	}, duckSpeed);
+})

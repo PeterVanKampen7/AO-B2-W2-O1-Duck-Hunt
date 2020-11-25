@@ -39,8 +39,7 @@
 	top: 300px;
 	left: 600px;
 	z-index: 1;
-	transition: ease 0.5s;
-
+	transition: ease 0.3s;
 }
 
 h2
@@ -72,5 +71,44 @@ h2
 	color: white;
 	background-color: lightgreen;
 	font-size: 18px;
+}
 
+#difficulty
+{
+	position: absolute;
+	top: 150px;
+	left: -185px;
+	max-width: 300px;
+	background-color: white;
+	z-index: 3;
+	cursor: auto;
+	transition: ease 1.5s;
+}
+
+#difficulty:hover
+{
+	left: 0px;
+}
+
+#difficulty > h2
+{
+	color: black;
+	padding: 2px;
+	margin-right: 90px;
+}
+
+#difficulty > button
+{
+	background-color: lightgreen;
+	color: white;
+	display: inline-block;
+	padding: 10px;
+}
+
+.arrow
+{
+	font-size: 30px;
+	position: absolute;
+	top: 50px;
+	left: 190px;
 }
