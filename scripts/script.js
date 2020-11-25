@@ -48,73 +48,130 @@ function fly(direction)
 	{
 		case "N":
 			posY -= 75;
-			checkBounds();
-			duck.style.top = posY+"px";		
+			duck.style.top = posY+"px";	
+			if(!checkBounds("Y"))
+			{
+				posY += 150;
+				duck.style.top = posY+"px";
+			}	
 			break;
 		case "NE":
 			posY -= 75;			
 			posX += 75;
-			checkBounds();
 			duck.style.top = posY+"px";	
+			if(!checkBounds("Y"))
+			{
+				posY += 150;
+				duck.style.top = posY+"px";
+			}	
 			duck.style.left = posX+"px";
+			if(!checkBounds("X"))
+			{
+				posX -= 150;
+				duck.style.left = posX+"px";
+			}
 			break;
 		case "E":
 			posX += 75;
-			checkBounds();
 			duck.style.left = posX+"px";
+			if(!checkBounds("X"))
+			{
+				posX -= 150;
+				duck.style.left = posX+"px";
+			}
 			break;
 		case "SE":
 			posY += 75;			
 			posX += 75;
-			checkBounds();
-			duck.style.top = posY+"px";
+			duck.style.top = posY+"px";	
+			if(!checkBounds("Y"))
+			{
+				posY -= 150;
+				duck.style.top = posY+"px";
+			}
 			duck.style.left = posX+"px";
+			if(!checkBounds("X"))
+			{
+				posX -= 150;
+				duck.style.left = posX+"px";
+			}
 			break;
 		case "S":
 			posY += 75;
-			checkBounds();
 			duck.style.top = posY+"px";	
+			if(!checkBounds("Y"))
+			{
+				posY -= 150;
+				duck.style.top = posY+"px";
+			}
 			break;
 		case "SW":
 			posY += 75;				
 			posX -= 75;
-			checkBounds();
-			duck.style.top = posY+"px";
+			duck.style.top = posY+"px";	
+			if(!checkBounds("Y"))
+			{
+				posY -= 150;
+				duck.style.top = posY+"px";
+			}
 			duck.style.left = posX+"px";
+			if(!checkBounds("X"))
+			{
+				posX += 150;
+				duck.style.left = posX+"px";
+			}
 			break;
 		case "W":
 			posX -= 75;
-			checkBounds();
 			duck.style.left = posX+"px";
+			if(!checkBounds("X"))
+			{
+				posX += 150;
+				duck.style.left = posX+"px";
+			}
 			break;
 		case "NW":
 			posY -= 75;			
 			posX -= 75;
-			checkBounds();
 			duck.style.top = posY+"px";	
+			if(!checkBounds("Y"))
+			{
+				posY += 150;
+				duck.style.top = posY+"px";
+			}	
 			duck.style.left = posX+"px";
+			if(!checkBounds("X"))
+			{
+				posX += 150;
+				duck.style.left = posX+"px";
+			}
 			break;
 	}
 }
 
-function checkBounds()
+function checkBounds(bound)
 {
-	if(posX < 0)
+	if(bound == "X")
 	{
-		posX = 1105;
+		if(posX > 0 && posX < 1105)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
-	else if(posX > 1105)
+	else if(bound == "Y")
 	{
-		posX = 0;
-	}
-
-	if(posY < 0)
-	{
-		posY = 600;
-	}
-	else if(posY > 630)
-	{
-		posY = 0;
+		if(posY > -100 && posY < 630)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 
