@@ -1,7 +1,21 @@
 var display = document.getElementById("display");
 var endgame = document.getElementById("endgame");
 
-var duck = document.getElementById("duck");
+var duck = {
+	html:document.getElementById("duck"),
+	X:600,
+	Y:300
+}
+var duck2 = {
+	html:document.getElementById("duck2"),
+	X:300,
+	Y:300
+}
+var duck3 = {
+	html:document.getElementById("duck3"),
+	X:900,
+	Y:300
+}
 var duckSpeed = 500;
 
 var hit = 0;
@@ -11,7 +25,13 @@ var missdisplay = document.getElementById("misses")
 
 var easy = document.getElementById("easy");
 var medium = document.getElementById("medium");
+medium.style.backgroundColor = "lightblue";
 var hard = document.getElementById("hard");
+
+var one = document.getElementById("one");
+one.style.backgroundColor = "lightblue";
+var two = document.getElementById("two");
+var three = document.getElementById("three");
 
 var directions = 
 [
@@ -31,7 +51,21 @@ again.addEventListener("click", function(){
 	location.reload();
 })
 
-duck.addEventListener("click", function(){
+duck.html.addEventListener("click", function(){
+	hit += 1;
+	miss -= 1;
+	hitdisplay.innerHTML = "HITS: "+hit;
+	checkEnd();
+})
+
+duck2.html.addEventListener("click", function(){
+	hit += 1;
+	miss -= 1;
+	hitdisplay.innerHTML = "HITS: "+hit;
+	checkEnd();
+})
+
+duck3.html.addEventListener("click", function(){
 	hit += 1;
 	miss -= 1;
 	hitdisplay.innerHTML = "HITS: "+hit;
@@ -44,121 +78,118 @@ display.addEventListener("click", function(){
 	checkEnd();
 })
 
-var posY = 300;
-var posX = 600;
-
-function fly(direction)
+function fly(direction, duck)
 {
 	switch(direction)
 	{
 		case "N":
-			posY -= 75;
-			duck.style.top = posY+"px";	
-			if(!checkBounds("Y"))
+			duck.Y -= 75;
+			duck.html.style.top = duck.Y+"px";	
+			if(!checkBounds("Y", duck))
 			{
-				posY += 150;
-				duck.style.top = posY+"px";
+				duck.Y += 150;
+				duck.html.style.top = duck.Y+"px";
 			}	
 			break;
 		case "NE":
-			posY -= 75;			
-			posX += 75;
-			duck.style.top = posY+"px";	
-			if(!checkBounds("Y"))
+			duck.Y -= 75;			
+			duck.X += 75;
+			duck.html.style.top = duck.Y+"px";	
+			if(!checkBounds("Y", duck))
 			{
-				posY += 150;
-				duck.style.top = posY+"px";
+				duck.Y += 150;
+				duck.html.style.top = duck.Y+"px";
 			}	
-			duck.style.left = posX+"px";
-			if(!checkBounds("X"))
+			duck.html.style.left = duck.X+"px";
+			if(!checkBounds("X", duck))
 			{
-				posX -= 150;
-				duck.style.left = posX+"px";
+				duck.X -= 150;
+				duck.html.style.left = duck.X+"px";
 			}
 			break;
 		case "E":
-			posX += 75;
-			duck.style.left = posX+"px";
-			if(!checkBounds("X"))
+			duck.X += 75;
+			duck.html.style.left = duck.X+"px";
+			if(!checkBounds("X", duck))
 			{
-				posX -= 150;
-				duck.style.left = posX+"px";
+				duck.X -= 150;
+				duck.html.style.left = duck.X+"px";
 			}
 			break;
 		case "SE":
-			posY += 75;			
-			posX += 75;
-			duck.style.top = posY+"px";	
-			if(!checkBounds("Y"))
+			duck.Y += 75;			
+			duck.X += 75;
+			duck.html.style.top = duck.Y+"px";	
+			if(!checkBounds("Y", duck))
 			{
-				posY -= 150;
-				duck.style.top = posY+"px";
+				duck.Y -= 150;
+				duck.html.style.top = duck.Y+"px";
 			}
-			duck.style.left = posX+"px";
-			if(!checkBounds("X"))
+			duck.html.style.left = duck.X+"px";
+			if(!checkBounds("X", duck))
 			{
-				posX -= 150;
-				duck.style.left = posX+"px";
+				duck.X -= 150;
+				duck.html.style.left = duck.X+"px";
 			}
 			break;
 		case "S":
-			posY += 75;
-			duck.style.top = posY+"px";	
-			if(!checkBounds("Y"))
+			duck.Y += 75;
+			duck.html.style.top = duck.Y+"px";	
+			if(!checkBounds("Y", duck))
 			{
-				posY -= 150;
-				duck.style.top = posY+"px";
+				duck.Y -= 150;
+				duck.html.style.top = duck.Y+"px";
 			}
 			break;
 		case "SW":
-			posY += 75;				
-			posX -= 75;
-			duck.style.top = posY+"px";	
-			if(!checkBounds("Y"))
+			duck.Y += 75;				
+			duck.X -= 75;
+			duck.html.style.top = duck.Y+"px";	
+			if(!checkBounds("Y", duck))
 			{
-				posY -= 150;
-				duck.style.top = posY+"px";
+				duck.Y -= 150;
+				duck.html.style.top = duck.Y+"px";
 			}
-			duck.style.left = posX+"px";
-			if(!checkBounds("X"))
+			duck.html.style.left = duck.X+"px";
+			if(!checkBounds("X", duck))
 			{
-				posX += 150;
-				duck.style.left = posX+"px";
+				duck.X += 150;
+				duck.html.style.left = duck.X+"px";
 			}
 			break;
 		case "W":
-			posX -= 75;
-			duck.style.left = posX+"px";
-			if(!checkBounds("X"))
+			duck.X -= 75;
+			duck.html.style.left = duck.X+"px";
+			if(!checkBounds("X", duck))
 			{
-				posX += 150;
-				duck.style.left = posX+"px";
+				duck.X += 150;
+				duck.html.style.left = duck.X+"px";
 			}
 			break;
 		case "NW":
-			posY -= 75;			
-			posX -= 75;
-			duck.style.top = posY+"px";	
-			if(!checkBounds("Y"))
+			duck.Y -= 75;			
+			duck.X -= 75;
+			duck.html.style.top = duck.Y+"px";	
+			if(!checkBounds("Y", duck))
 			{
-				posY += 150;
-				duck.style.top = posY+"px";
+				duck.Y += 150;
+				duck.html.style.top = duck.Y+"px";
 			}	
-			duck.style.left = posX+"px";
-			if(!checkBounds("X"))
+			duck.html.style.left = duck.X+"px";
+			if(!checkBounds("X", duck))
 			{
-				posX += 150;
-				duck.style.left = posX+"px";
+				duck.X += 150;
+				duck.html.style.left = duck.X+"px";
 			}
 			break;
 	}
 }
 
-function checkBounds(bound)
+function checkBounds(bound, duck)
 {
 	if(bound == "X")
 	{
-		if(posX > 0 && posX < 1105)
+		if(duck.X > 0 && duck.X < 1105)
 		{
 			return true;
 		}
@@ -169,7 +200,7 @@ function checkBounds(bound)
 	}
 	else if(bound == "Y")
 	{
-		if(posY > -100 && posY < 630)
+		if(duck.Y > -100 && duck.Y < 630)
 		{
 			return true;
 		}
@@ -180,10 +211,23 @@ function checkBounds(bound)
 	}
 }
 
-var run = setInterval(function(){
-	var rand = Math.floor((Math.random() * 8));
-	fly(directions[rand]);
-}, duckSpeed);
+var run;
+function startInterval()
+{
+	run = setInterval(function(){
+
+		var rand = Math.floor((Math.random() * 8));
+		fly(directions[rand], duck);
+
+		var rand2 = Math.floor((Math.random() * 8));
+		fly(directions[rand2], duck2);
+
+		var rand3 = Math.floor((Math.random() * 8));
+		fly(directions[rand3], duck3);
+
+	}, duckSpeed);
+} 
+startInterval();
 
 function checkEnd()
 {
@@ -198,31 +242,58 @@ function checkEnd()
 }
 
 easy.addEventListener("click", function(){
+	easy.style.backgroundColor = "lightblue";
+	medium.style.backgroundColor = "lightgreen";
+	hard.style.backgroundColor = "lightgreen";
 	miss -= 1;
 	duckSpeed = 700;
 	clearInterval(run);
-	run = setInterval(function(){
-		var rand = Math.floor((Math.random() * 8));
-		fly(directions[rand]);
-	}, duckSpeed);
+	startInterval();
 })
 
 medium.addEventListener("click", function(){
+	easy.style.backgroundColor = "lightgreen";
+	medium.style.backgroundColor = "lightblue";
+	hard.style.backgroundColor = "lightgreen";
 	miss -= 1;
 	duckSpeed = 500;
 	clearInterval(run);
-	run = setInterval(function(){
-		var rand = Math.floor((Math.random() * 8));
-		fly(directions[rand]);
-	}, duckSpeed);
+	startInterval();
 })
 
 hard.addEventListener("click", function(){
+	easy.style.backgroundColor = "lightgreen";
+	medium.style.backgroundColor = "lightgreen";
+	hard.style.backgroundColor = "lightblue";
 	miss -= 1;
 	duckSpeed = 300;
 	clearInterval(run);
-	run = setInterval(function(){
-		var rand = Math.floor((Math.random() * 8));
-		fly(directions[rand]);
-	}, duckSpeed);
+	startInterval();
+})
+
+one.addEventListener("click", function(){
+	duck2.html.style.display = "none";
+	duck3.html.style.display = "none";
+	miss -= 1;
+	one.style.backgroundColor = "lightblue";
+	two.style.backgroundColor = "lightgreen";
+	three.style.backgroundColor = "lightgreen";
+})
+
+two.addEventListener("click", function(){
+	duck2.html.style.display = "inline";
+	duck3.html.style.display = "none";
+	miss -= 1;
+	one.style.backgroundColor = "lightgreen";
+	two.style.backgroundColor = "lightblue";
+	three.style.backgroundColor = "lightgreen";
+})
+
+three.addEventListener("click", function(){
+	duck2.html.style.display = "inline";
+	duck3.html.style.display = "inline";
+	miss -= 1;
+	one.style.backgroundColor = "lightgreen";
+	two.style.backgroundColor = "lightgreen";
+	three.style.backgroundColor = "lightblue";
 })

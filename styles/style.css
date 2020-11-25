@@ -27,7 +27,7 @@
 	left: -1px;
 	background-color: rgba(34,41,49,0.8);
 	display: none;
-	z-index: 2;
+	z-index: 4;
 	cursor: auto;
 }
 
@@ -40,6 +40,30 @@
 	left: 600px;
 	z-index: 1;
 	transition: ease 0.3s;
+}
+
+#duck2
+{
+	width: 175px;
+	height: 175px;
+	position: absolute;
+	top: 300px;
+	left: 300px;
+	z-index: 1;
+	transition: ease 0.3s;
+	display: none;
+}
+
+#duck3
+{
+	width: 175px;
+	height: 175px;
+	position: absolute;
+	top: 300px;
+	left: 900px;
+	z-index: 1;
+	transition: ease 0.3s;
+	display: none;
 }
 
 h2
@@ -105,7 +129,48 @@ h2
 	padding: 10px;
 }
 
-.arrow
+#difficulty > .arrow
+{
+	font-size: 30px;
+	position: absolute;
+	top: 50px;
+	left: 190px;
+}
+
+#birdNumber
+{
+	position: absolute;
+	top: 300px;
+	left: -185px;
+	max-width: 300px;
+	background-color: white;
+	z-index: 3;
+	cursor: auto;
+	transition: ease 1.5s;
+}
+
+#birdNumber:hover
+{
+	left: 0px;
+}
+
+#birdNumber > h2
+{
+	color: black;
+	padding: 2px;
+	margin-right: 110px;
+	margin-left: 46px;
+}
+
+#birdNumber > button
+{
+	background-color: lightgreen;
+	color: white;
+	display: inline-block;
+	padding: 10px 20px;
+}
+
+#birdNumber > .arrow
 {
 	font-size: 30px;
 	position: absolute;
