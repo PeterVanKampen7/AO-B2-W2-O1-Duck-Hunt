@@ -4,17 +4,20 @@ var endgame = document.getElementById("endgame");
 var duck = {
 	html:document.getElementById("duck"),
 	X:600,
-	Y:300
+	Y:300,
+	run: "null"
 }
 var duck2 = {
 	html:document.getElementById("duck2"),
 	X:300,
-	Y:300
+	Y:300,
+	run: "null"
 }
 var duck3 = {
 	html:document.getElementById("duck3"),
 	X:900,
-	Y:300
+	Y:300,
+	run: "null"
 }
 var duckSpeed = 500;
 
@@ -56,6 +59,7 @@ duck.html.addEventListener("click", function(){
 	miss -= 1;
 	hitdisplay.innerHTML = "HITS: "+hit;
 	checkEnd();
+	resetDuck(duck);
 })
 
 duck2.html.addEventListener("click", function(){
@@ -63,6 +67,7 @@ duck2.html.addEventListener("click", function(){
 	miss -= 1;
 	hitdisplay.innerHTML = "HITS: "+hit;
 	checkEnd();
+	resetDuck(duck2);
 })
 
 duck3.html.addEventListener("click", function(){
@@ -70,6 +75,7 @@ duck3.html.addEventListener("click", function(){
 	miss -= 1;
 	hitdisplay.innerHTML = "HITS: "+hit;
 	checkEnd();
+	resetDuck(duck3);
 })
 
 display.addEventListener("click", function(){
@@ -77,6 +83,20 @@ display.addEventListener("click", function(){
 	missdisplay.innerHTML = "MISSES: "+miss;
 	checkEnd();
 })
+
+function resetDuck(duck)
+{
+	clearInterval(duck.run);
+	duck.html.style.display = "none";
+	duck.X = 600;
+	duck.Y = 300;	
+	duck.html.style.left = duck.X+"px";
+	duck.html.style.top = duck.Y+"px";
+	setTimeout(function(){		
+		duck.html.style.display = "inline";
+		startInterval(duck);
+	}, 1000);
+}
 
 function fly(direction, duck)
 {
@@ -212,29 +232,35 @@ function checkBounds(bound, duck)
 }
 
 var run;
-function startInterval()
+function startInterval(duck)
 {
-	run = setInterval(function(){
-
+	duck.run = setInterval(function(){
 		var rand = Math.floor((Math.random() * 8));
 		fly(directions[rand], duck);
-
-		var rand2 = Math.floor((Math.random() * 8));
-		fly(directions[rand2], duck2);
-
-		var rand3 = Math.floor((Math.random() * 8));
-		fly(directions[rand3], duck3);
-
 	}, duckSpeed);
-} 
-startInterval();
+}
+
+function startAll()
+{
+	startInterval(duck);
+	startInterval(duck2);
+	startInterval(duck3);
+}
+startAll();
+
+function stopAll()
+{
+	clearInterval(duck.run);
+	clearInterval(duck2.run);
+	clearInterval(duck3.run);
+}
 
 function checkEnd()
 {
 	var temp = hit + miss;
 	if(temp == 20)
 	{
-		clearInterval(run);
+		stopAll();
 		endgame.style.display = "block";
 		var score = document.getElementById("score");
 		score.innerHTML = "YOU SCORED "+hit+" HITS AND "+miss+" MISSES";
@@ -247,8 +273,8 @@ easy.addEventListener("click", function(){
 	hard.style.backgroundColor = "lightgreen";
 	miss -= 1;
 	duckSpeed = 700;
-	clearInterval(run);
-	startInterval();
+	stopAll();
+	startAll();
 })
 
 medium.addEventListener("click", function(){
@@ -257,8 +283,8 @@ medium.addEventListener("click", function(){
 	hard.style.backgroundColor = "lightgreen";
 	miss -= 1;
 	duckSpeed = 500;
-	clearInterval(run);
-	startInterval();
+	stopAll();
+	startAll();
 })
 
 hard.addEventListener("click", function(){
@@ -267,8 +293,8 @@ hard.addEventListener("click", function(){
 	hard.style.backgroundColor = "lightblue";
 	miss -= 1;
 	duckSpeed = 300;
-	clearInterval(run);
-	startInterval();
+	stopAll();
+	startAll();
 })
 
 one.addEventListener("click", function(){
@@ -297,3 +323,4 @@ three.addEventListener("click", function(){
 	two.style.backgroundColor = "lightgreen";
 	three.style.backgroundColor = "lightblue";
 })
+
