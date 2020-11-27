@@ -220,7 +220,7 @@ function checkBounds(bound, duck)
 	}
 	else if(bound == "Y")
 	{
-		if(duck.Y > -100 && duck.Y < 630)
+		if(duck.Y > -50 && duck.Y < 630)
 		{
 			return true;
 		}
